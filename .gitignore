@@ -5,3 +5,4 @@
 *.log
 *.exe
 .DS_Store
+/build/

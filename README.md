@@ -16,7 +16,7 @@ Developed and tested with [OctoWoW](https://octowow.st/) and [VanillaFixes](http
 
 **Requirements:** A compatible 32-bit WoW 1.12.1 executable and VanillaFixes with DLL loading enabled.
 
-1. Download `CrossFactionResFix.dll` from `bin/` (or a published release).
+1. Download the prebuilt [CrossFactionResFix.dll](bin/CrossFactionResFix.dll) (use **Download raw file** on GitHub), or [build it yourself](#building).
 2. Copy it to the WoW installation folder alongside `WoW.exe`.
 3. Open `dlls.txt` in the same folder and add this line, keeping the existing entries:
 
@@ -43,7 +43,6 @@ This is **not** a general-purpose patch for every WoW 1.12.1 build. The RVA and 
 | Horde resurrecting a released Alliance player outside party | Not tested |
 | Resurrection without spirit release, outside party | Reported as not permitted |
 | Resurrection without spirit release, inside party | Reported as permitted |
-| Native Windows | Not separately tested |
 | Other WoW 1.12.1 clients | Not verified |
 
 Server-side restrictions still apply. Client or launcher updates may change the patch location or surrounding code.
@@ -63,20 +62,21 @@ CrossFactionResFix: unexpected target byte, no patch
 CrossFactionResFix: VirtualProtect failed
 ```
 
-## Build from source
+## Building
 
-On Ubuntu, install MinGW-w64 and compile the DLL for **32-bit Windows**:
+Requires CMake (3.15+) and a Visual Studio MSVC toolchain that can target 32-bit Windows.
+WoW.exe is x86, so the DLL must be built as Win32; an x64 build will not load.
 
-```bash
-sudo apt install gcc-mingw-w64-i686
-i686-w64-mingw32-gcc -Os -shared -s -o CrossFactionResFix.dll src/CrossFactionResFix.c
+```powershell
+cmake -B build -A Win32
+cmake --build build --config Release
 ```
 
-The source is self-contained and uses Windows system APIs. The checked-in `bin/CrossFactionResFix.dll` is the original binary tested with OctoWoW; a rebuild may not be byte-for-byte identical.
+The output is `build/Release/CrossFactionResFix.dll`.
 
 ## Credits
 
-The underlying one-byte correction is from [Vanilla Tweaks](https://github.com/tubtubs/vanilla-tweaks), originally created by [brndd](https://github.com/brndd/vanilla-tweaks). The [OctoWoW Modernization Tool](https://octowow.st/git/Dusk/Modernization-Tool) also exposes this fix. [VanillaFixes](https://github.com/hannesmann/vanillafixes) provides DLL loading.
+The underlying one-byte correction is from [Vanilla Tweaks](https://github.com/tubtubs/vanilla-tweaks), originally created by [brndd](https://github.com/brndd/vanilla-tweaks). [VanillaFixes](https://github.com/hannesmann/vanillafixes) provides DLL loading.
 
 This project repackages the correction as a standalone runtime DLL.
 
