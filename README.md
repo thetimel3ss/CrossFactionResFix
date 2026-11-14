@@ -16,7 +16,7 @@ Developed and tested with [OctoWoW](https://octowow.st/) and [VanillaFixes](http
 
 **Requirements:** A compatible 32-bit WoW 1.12.1 executable and VanillaFixes with DLL loading enabled.
 
-1. Download the prebuilt [CrossFactionResFix.dll](bin/CrossFactionResFix.dll) (use **Download raw file** on GitHub), or [build it yourself](#building).
+1. Download [CrossFactionResFix.dll](https://github.com/thetimel3ss/CrossFactionResFix/releases/download/v1.0.0/CrossFactionResFix.dll) from [release v1.0.0](https://github.com/thetimel3ss/CrossFactionResFix/releases/tag/v1.0.0), or [build it yourself](#building).
 2. Copy it to the WoW installation folder alongside `WoW.exe`.
 3. Open `dlls.txt` in the same folder and add this line, keeping the existing entries:
 
